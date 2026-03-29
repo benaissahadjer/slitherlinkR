@@ -1,20 +1,20 @@
 # slitherlinkR
 
-## 📌 Projet
+##  Projet
 Projet de programmation R – Université de Montpellier
 
 Ce projet consiste à développer un package R ainsi qu’une application Shiny interactive pour le jeu Slitherlink.
 
 ---
 
-## 👥 Groupe 5
+##  Groupe 5
 
 - Hadjer Benaissa
 - Myriam El-Idrissi
 
 ---
 
-## 🎯 Objectif
+##  Objectif
 
 L’objectif est de :
 
@@ -25,7 +25,7 @@ L’objectif est de :
 
 ---
 
-## 🧩 Règles du jeu Slitherlink
+##  Règles du jeu Slitherlink
 
 - certaines cases contiennent des nombres (0 à 3)
 - chaque nombre indique combien de côtés doivent être tracés
@@ -36,7 +36,7 @@ L’objectif est de :
 
 ---
 
-## 🎮 Fonctionnement de l’application
+##  Fonctionnement de l’application
 
 L’utilisateur peut :
 
@@ -47,38 +47,39 @@ L’utilisateur peut :
 
 ---
 
-## ⚙️ Structure du projet
+##  Structure du projet
 
-slitherlinkR/
-├── R/
-├── man/
-├── inst/shiny/
-├── DESCRIPTION
-├── NAMESPACE
-└── README.md
+Le projet est organisé de la manière suivante :
 
+- `R/` : contient les fonctions du package  
+- `man/` : documentation des fonctions  
+- `inst/shiny/` : application Shiny  
+- `DESCRIPTION` : informations du package  
+- `NAMESPACE` : export des fonctions  
+- `README.md` : présentation du projet  
 ---
 
-## 🚀 Lancer le projet
+##  Lancer le projet
 
-Dans R :
+Pour exécuter le projet :
 
+1. Ouvrir RStudio dans le dossier du projet
+
+2. Charger le package :
 devtools::load_all()
 
-Puis :
-
+3. Lancer l’application Shiny :
 shiny::runApp("inst/shiny")
-
 ---
 
-## 🔀 Organisation Git
+##  Organisation Git
 
 - main → version stable
 - dev → développement
 
 ---
 
-## 📚 Technologies utilisées
+##  Technologies utilisées
 
 - R
 - Shiny
@@ -87,6 +88,6 @@ shiny::runApp("inst/shiny")
 
 ---
 
-## ✅ État du projet
+##  État du projet
 
 Projet en cours de développement.
