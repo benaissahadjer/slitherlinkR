@@ -2,6 +2,7 @@ library(shiny)
 
 source("../../R/create_game.R")
 source("../../R/is_solved.R")
+source("../../R/get_clues.R")
 
 ui <- fluidPage(
   titlePanel("Jeu Slitherlink"),
@@ -41,6 +42,14 @@ server <- function(input, output) {
     for(i in 1:n) {
       abline(h = i)
       abline(v = i)
+      for (i in 1:n) {
+        for (j in 1:n) {
+          val <- game()$clues[i, j]
+          if (!is.na(val)) {
+            text(j, n - i + 1, labels = val, cex = 1.2)
+          }
+        }
+      }
     }
   })
 
