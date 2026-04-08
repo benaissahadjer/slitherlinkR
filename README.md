@@ -43,7 +43,13 @@ L’utilisateur peut :
 - choisir un niveau de difficulté (facile, moyen, difficile)
 - lancer une nouvelle partie
 - tracer ou effacer des arêtes
-- vérifier si la solution est correcte
+- vérification automatique de la solution
+
+---
+
+## Aperçu de l'application
+
+[mettre un screen de l'appli qd finish]
 
 ---
 
