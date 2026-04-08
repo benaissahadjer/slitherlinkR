@@ -27,7 +27,7 @@ L’objectif est de :
 
 ##  Règles du jeu Slitherlink
 
-- certaines cases contiennent des nombres (0 à 3)
+- certaines cases contiennent des nombres (0 à 4)
 - chaque nombre indique combien de côtés doivent être tracés
 - le joueur doit former une seule boucle fermée
 - la boucle :
