@@ -101,4 +101,6 @@ shiny::runApp("inst/shiny")
 
 ##  État du projet
 
-Projet en cours de développement.
+- logique principale du jeu : fonctionnelle
+- application Shiny : en cous de d'amélioration
+- interface utilisateur : en cours de développement
