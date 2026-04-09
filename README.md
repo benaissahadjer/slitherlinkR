@@ -2,8 +2,10 @@
 
 ##  Projet
 Projet de programmation R – Université de Montpellier
+Encadrant : Jean-Michel Marin
 
-Ce projet consiste à développer un package R ainsi qu’une application Shiny interactive pour le jeu Slitherlink.
+
+Ce projet consiste à développer un package R ainsi qu’une application Shiny interactive pour le jeu de logique Slitherlink.
 
 ---
 
@@ -27,7 +29,9 @@ L’objectif est de :
 
 ##  Règles du jeu Slitherlink
 
-- certaines cases contiennent des nombres (0 à 3)
+Le jeu Slitherlink est un puzzle logique sur une grille de points. Le but du jey est de pouvoir relier des points voisins pour former une seule boucle fermée :
+
+- certaines cases contiennent des nombres (0 à 4)
 - chaque nombre indique combien de côtés doivent être tracés
 - le joueur doit former une seule boucle fermée
 - la boucle :
@@ -43,7 +47,14 @@ L’utilisateur peut :
 - choisir un niveau de difficulté (facile, moyen, difficile)
 - lancer une nouvelle partie
 - tracer ou effacer des arêtes
-- vérifier si la solution est correcte
+- Vérifier si la solution est correcte
+- Utiliser le solveur automatique
+
+---
+
+## Aperçu de l'application
+
+[mettre un screen de l'appli qd finish]
 
 ---
 
@@ -90,4 +101,6 @@ shiny::runApp("inst/shiny")
 
 ##  État du projet
 
-Projet en cours de développement.
+- logique principale du jeu : fonctionnelle
+- application Shiny : en cous de d'amélioration
+- interface utilisateur : en cours de développement
