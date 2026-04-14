@@ -1,14 +1,12 @@
-create_game <- function(n) {
-  grid <- matrix(NA, n, n)
-  clues <- get_clues(n)
+create_game <- function(n, difficulte = "Facile") {
+  resultat  <- get_clues(n, difficulte)
 
   game <- list(
-    grid = grid,
-    clues = clues,
-    n = n
+    grid     = matrix(NA, n, n),
+    clues    = resultat$clues,
+    solution = resultat$solution,   # la vraie solution est stockée
+    n        = n
   )
-
   class(game) <- "slitherlink"
-
   return(game)
 }
