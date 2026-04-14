@@ -70,7 +70,7 @@ ui <- fluidPage(
           selectInput(
             "niveau",
             "Choisir la difficulté :",
-            choices = c("Facile", "Moyen", "Difficile"),
+            choices  = c("Facile", "Moyen", "Difficile", "Expert"),
             selected = "Facile"
           ),
 
@@ -80,6 +80,8 @@ ui <- fluidPage(
           br(),
           actionButton("check", "Vérifier", class = "btn-success"),
           br(), br(),
+          actionButton("show_solution", "Voir solution", class = "btn-danger"),
+
 
           p("Objectif : tracer une boucle fermée qui respecte les nombres dans la grille.",
             style = "font-size:16px;")
@@ -96,6 +98,7 @@ ui <- fluidPage(
       )
     )
   )
+
 )
 
 server <- function(input, output, session) {
@@ -106,58 +109,39 @@ server <- function(input, output, session) {
   )
 
   observeEvent(input$plot_click, {
-
-    req(game())
-    req(segments$horiz)
+    req(game(), segments$horiz)
 
     x <- input$plot_click$x
     y <- input$plot_click$y
     n <- game()$n
 
-    # position dans la grille
-    j <- floor(x) + 1
-    i <- floor(y) + 1
+    # Conversion : plot (y=0 bas) -> matrice (i=1 haut)
+    j_float <- x
+    i_float <- n - y   # inversion de l'axe Y
 
-    # distance aux bords de la case
-    dx <- x - floor(x)
-    dy <- y - floor(y)
+    j <- floor(j_float) + 1
+    i <- floor(i_float) + 1
 
-    # distance aux 4 côtés
-    dist_top <- dy
+    dx <- j_float - floor(j_float)
+    dy <- i_float - floor(i_float)
+
+    dist_top    <- dy
     dist_bottom <- 1 - dy
-    dist_left <- dx
-    dist_right <- 1 - dx
+    dist_left   <- dx
+    dist_right  <- 1 - dx
 
     min_dist <- min(dist_top, dist_bottom, dist_left, dist_right)
+    if (min_dist > 0.35) return()
 
-    # haut
-    if (min_dist == dist_top) {
-      if (i >= 1 && i <= n+1 && j >= 1 && j <= n) {
-        segments$horiz[i, j] <- 1 - segments$horiz[i, j]
-      }
+    if (min_dist == dist_top && i >= 1 && i <= n+1 && j >= 1 && j <= n) {
+      segments$horiz[i, j] <- 1 - segments$horiz[i, j]
+    } else if (min_dist == dist_bottom && i+1 <= n+1 && j >= 1 && j <= n) {
+      segments$horiz[i+1, j] <- 1 - segments$horiz[i+1, j]
+    } else if (min_dist == dist_left && i >= 1 && i <= n && j >= 1 && j <= n+1) {
+      segments$vert[i, j] <- 1 - segments$vert[i, j]
+    } else if (min_dist == dist_right && i >= 1 && i <= n && j+1 <= n+1) {
+      segments$vert[i, j+1] <- 1 - segments$vert[i, j+1]
     }
-
-    # bas
-    else if (min_dist == dist_bottom) {
-      if (i+1 >= 1 && i+1 <= n+1 && j >= 1 && j <= n) {
-        segments$horiz[i+1, j] <- 1 - segments$horiz[i+1, j]
-      }
-    }
-
-    # gauche
-    else if (min_dist == dist_left) {
-      if (i >= 1 && i <= n && j >= 1 && j <= n+1) {
-        segments$vert[i, j] <- 1 - segments$vert[i, j]
-      }
-    }
-
-    # droite
-    else if (min_dist == dist_right) {
-      if (i >= 1 && i <= n && j+1 >= 1 && j+1 <= n+1) {
-        segments$vert[i, j+1] <- 1 - segments$vert[i, j+1]
-      }
-    }
-
   })
 
   game <- reactiveVal(NULL)
@@ -167,8 +151,13 @@ server <- function(input, output, session) {
   status_text <- reactiveVal("Choisissez une difficulté puis lancez une nouvelle partie.")
 
   observeEvent(input$new, {
-    n <- if (input$niveau == "Facile") 5 else if (input$niveau == "Moyen") 7 else 10
-    game(create_game(n))
+    n <- switch(input$niveau,
+                "Facile"    = 5,
+                "Moyen"     = 7,
+                "Difficile" = 10,
+                "Expert"    = 12
+    )
+    game(create_game(n, input$niveau))
     segments$horiz <- matrix(0, n+1, n)
     segments$vert  <- matrix(0, n, n+1)
     status_text("Jeu en cours")
@@ -198,6 +187,13 @@ server <- function(input, output, session) {
     }
   })
 
+  observeEvent(input$show_solution, {
+    req(game())
+    segments$horiz <- game()$solution$horiz
+    segments$vert  <- game()$solution$vert
+    status_text("Solution affichée")
+  })
+
   output$gridPlot <- renderPlot({
     req(game())
     n <- game()$n
@@ -217,6 +213,13 @@ server <- function(input, output, session) {
       abline(v = i, col = "grey70")
     }
 
+    # Points aux intersections (coins des cases)
+    for (i in 0:n) {
+      for (j in 0:n) {
+        points(j, i, pch = 16, cex = 0.6, col = "grey40")
+      }
+    }
+
     for (i in 1:n) {
       for (j in 1:n) {
         val <- game()$clues[i, j]
@@ -225,28 +228,30 @@ server <- function(input, output, session) {
         }
       }
     }
-    # afficher segments horizontaux
+    # Segments horizontaux
     if (!is.null(segments$horiz)) {
-      for (i in 1:nrow(segments$horiz)) {
-        for (j in 1:ncol(segments$horiz)) {
-          if (segments$horiz[i,j] == 1) {
-            segments(j-1, i-1, j, i-1, lwd = 3)
+      for (i in 1:(n+1)) {
+        for (j in 1:n) {
+          if (segments$horiz[i, j] == 1) {
+            y_coord <- n - (i - 1)   # i=1 -> y=n (haut), i=n+1 -> y=0 (bas)
+            segments(j - 1, y_coord, j, y_coord, lwd = 3, col = "red")
           }
         }
       }
     }
 
-    # afficher segments verticaux
+    # Segments verticaux
     if (!is.null(segments$vert)) {
-      for (i in 1:nrow(segments$vert)) {
-        for (j in 1:ncol(segments$vert)) {
-          if (segments$vert[i,j] == 1) {
-            segments(j-1, i-1, j-1, i, lwd = 3)
+      for (i in 1:n) {
+        for (j in 1:(n+1)) {
+          if (segments$vert[i, j] == 1) {
+            y_top    <- n - (i - 1)  # bord haut de la ligne i
+            y_bottom <- n - i        # bord bas de la ligne i
+            segments(j - 1, y_top, j - 1, y_bottom, lwd = 3, col = "red")
           }
         }
       }
     }
-
   })
 
 
