@@ -1,13 +1,35 @@
-#' Générer une grille de Slitherlink
+#' Générer une grille et une solution de Slitherlink
 #'
-#' Cette fonction génère ou extrait les indices nécessaires au jeu Slitherlink.
+#' Cette fonction génère une solution valide de Slitherlink et en déduit
+#' les indices à afficher selon un niveau de difficulté.
 #'
-#' @param n taille de la grille
-#' @return matrice des indices
+#' @param n entier. Taille de la grille (n x n)
+#' @param difficulte caractère. Niveau de difficulté :
+#'   "Facile", "Moyen", "Difficile", "Expert"
+#'
+#' @return Une liste contenant :
+#' \itemize{
+#'   \item \code{clues} : matrice des indices (avec valeurs manquantes selon difficulté)
+#'   \item \code{solution} : liste contenant :
+#'     \itemize{
+#'       \item \code{horiz} : segments horizontaux
+#'       \item \code{vert} : segments verticaux
+#'     }
+#' }
+#'
+#' @details
+#' Le niveau de difficulté agit sur :
+#' \itemize{
+#'   \item le nombre d'indices masqués
+#'   \item la probabilité de suppression des 0
+#'   \item la complexité du chemin généré
+#' }
+#'
 #' @export
 
 get_clues <- function(n, difficulte = "Facile") {
 
+  # Paramètres selon difficulté
   params <- switch(difficulte,
                    "Facile" = list(
                      taille_min  = as.integer(n * 2),
@@ -39,10 +61,13 @@ get_clues <- function(n, difficulte = "Facile") {
                    )
   )
 
+  # Boucle jusqu'à obtenir une solution valide
   repeat {
+    # Initialisation des matrices de solution
     horiz <- matrix(0, n+1, n)
     vert  <- matrix(0, n, n+1)
 
+    # Point de départ aléatoire
     si <- sample(2:(n-1), 1)
     sj <- sample(2:(n-1), 1)
     ci <- si; cj <- sj
@@ -55,6 +80,7 @@ get_clues <- function(n, difficulte = "Facile") {
 
     for (step in 1:(n * n * 6)) {
       dirs_pond <- 1:4
+      # Favoriser ou casser la direction selon la tortuosité
       if (!is.null(last_dir)) {
         same_idx <- which(sapply(directions, function(d) all(d == last_dir)))
         if (length(same_idx) > 0) {
@@ -72,6 +98,7 @@ get_clues <- function(n, difficulte = "Facile") {
 
         if (ni < 1 || ni > n+1 || nj < 1 || nj > n+1) next
 
+        # Détection du type d'arête
         if (dir[1] == 1)  { ei <- ci;   ej <- cj;   type <- "v" }
         if (dir[1] == -1) { ei <- ci-1; ej <- cj;   type <- "v" }
         if (dir[2] == 1)  { ei <- ci;   ej <- cj;   type <- "h" }
@@ -91,6 +118,7 @@ get_clues <- function(n, difficulte = "Facile") {
         if (already) next
         if (length(path_nodes) >= params$taille_max) next
 
+        # Ajouter segment
         if (type == "v") vert[ei, ej]  <- 1
         else             horiz[ei, ej] <- 1
 
