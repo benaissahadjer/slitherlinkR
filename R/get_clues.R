@@ -1,3 +1,9 @@
+#' Générer une grille de Slitherlink
+#'
+#' @param n taille de la grille
+#' @return matrice des indices
+#' @export
+
 get_clues <- function(n, difficulte = "Facile") {
 
   params <- switch(difficulte,
