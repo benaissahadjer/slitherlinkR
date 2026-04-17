@@ -1,3 +1,9 @@
+#' Vérifier si la solution est correcte
+#'
+#' @param game objet slitherlink
+#' @return TRUE ou FALSE
+#' @export
+
 is_solved <- function(game) {
   clues    <- game$clues
   segments <- game$segments
