@@ -49,7 +49,7 @@ L’interface utilisateur est conçue pour être simple et réactive. Voici les 
 
 ---
 
-## 🖼️ Aperçu du jeu
+## Aperçu du jeu
 
 Voici un aperçu de l'interface interactive de **slitherlinkR** en action :
 
