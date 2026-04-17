@@ -4,7 +4,7 @@
 \alias{create_game}
 \title{Créer une nouvelle partie de Slitherlink}
 \usage{
-create_game(n, difficulte = "Facile")
+create_game(n, difficulte = "Facile","Moyen", "Difficile", "Expert")
 }
 \arguments{
 \item{n}{taille de la grille}
