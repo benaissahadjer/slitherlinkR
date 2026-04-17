@@ -3,7 +3,7 @@ Title: Jeu de Logique Slitherlink Interactif
 Version: 1.0.0
 Authors@R: c(
     person("Hadjer", "Benaissa", email = "hadjer.benaissa@etu.umontpellier.fr", role = c("aut")),
-    person("Myriam", "El-Idrissi", email = "myriam.el-idrissi@etu.umontpellier.fr", role = "aut","cre"))
+    person("Myriam", "El-Idrissi", email = "myriam.1232003@gmail.com", role = "aut","cre"))
 Description: Implémentation du jeu de logique Slitherlink en R. 
     Le package propose une génération de grilles basée sur la construction 
     de boucles valides, une vérification des contraintes locales du jeu, 
