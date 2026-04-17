@@ -1,106 +1,74 @@
-# slitherlinkR
+# slitherlinkR 
 
-##  Projet
-Projet de programmation R – Université de Montpellier
-Encadrant : Jean-Michel Marin
+## Présentation du Projet
+**Projet de programmation R – Université de Montpellier** **Encadrant :** Jean-Michel Marin  
 
-
-Ce projet consiste à développer un package R ainsi qu’une application Shiny interactive pour le jeu de logique Slitherlink.
+Ce projet consiste à développer un package R complet ainsi qu’une application Shiny interactive pour le jeu de logique **Slitherlink**.
 
 ---
 
 ##  Groupe 5
-
-- Hadjer Benaissa
-- Myriam El-Idrissi
-
----
-
-##  Objectif
-
-L’objectif est de :
-
-- créer un package R structuré
-- implémenter la logique du jeu Slitherlink
-- développer une application Shiny interactive
-- permettre à l’utilisateur de jouer en choisissant un niveau de difficulté
+- **Hadjer Benaissa**
+- **Myriam El-Idrissi**
 
 ---
 
-##  Règles du jeu Slitherlink
-
-Le jeu Slitherlink est un puzzle logique sur une grille de points. Le but du jey est de pouvoir relier des points voisins pour former une seule boucle fermée :
-
-- certaines cases contiennent des nombres (0 à 4)
-- chaque nombre indique combien de côtés doivent être tracés
-- le joueur doit former une seule boucle fermée
-- la boucle :
-  - ne doit pas se croiser
-  - ne doit pas se ramifier
+##  Objectifs
+L’objectif de ce projet était de :
+- Concevoir un **package R** structuré et documenté.
+- Implémenter la **logique algorithmique** du Slitherlink (génération de boucle aléatoire, calcul d'indices et vérification de validité).
+- Développer une **interface Shiny moderne**.
+- Proposer une expérience de jeu fluide avec différents niveaux de difficulté.
 
 ---
 
-##  Fonctionnement de l’application
-
-L’utilisateur peut :
-
-- choisir un niveau de difficulté (facile, moyen, difficile)
-- lancer une nouvelle partie
-- tracer ou effacer des arêtes
-- Vérifier si la solution est correcte
-- Utiliser le solveur automatique
+##  Règles du Jeu Slitherlink
+Le Slitherlink est un puzzle logique se jouant sur une grille de points. Le but est de relier des points voisins pour former une **unique boucle fermée** :
+- Les nombres (0 à 3) indiquent combien de segments entourent la case.
+- La boucle ne doit jamais se croiser ni se ramifier.
+- À la fin, tous les segments tracés doivent être connectés pour former un seul chemin fermé.
 
 ---
 
-## Aperçu de l'application
+##  Fonctionnement de l’Application
+L’interface utilisateur est conçue pour être simple et réactive. Voici les étapes et outils disponibles pour le joueur :
 
-[mettre un screen de l'appli qd finish]
+###  Déroulement d'une partie
+1. **Choisir le niveau** : Sélectionnez la difficulté via le menu déroulant (Facile, Moyen, Difficile, Expert). Cela ajuste la taille de la grille et le nombre d'indices visibles.
+2. **Lancer le jeu** : Cliquez sur le bouton **"Nouvelle partie"** pour générer une grille aléatoire.
+3. **Tracer la boucle** : Cliquez directement sur les segments entre les points pour les activer (noir) ou les désactiver.
+
+###  Barre d'outils (Boutons)
+* **Nouvelle partie** : Génère un nouveau puzzle basé sur le niveau de difficulté choisi.
+* **Vérifier** : Analyse instantanément si votre tracé respecte les indices numériques et s'il forme une boucle unique et fermée.
+* **Effacer** : Réinitialise votre tracé actuel pour recommencer la grille de zéro.
+* **Solution** : Affiche la réponse correcte si vous êtes bloqué (tous les segments de la boucle apparaissent).
+
+---
+---
+
+##  Structure du Projet
+Le projet respecte l'arborescence standard d'un package R :
+
+* **`R/`** : Logique interne du package.
+    * `create_game.R` : Génération de la boucle et de la grille.
+    * `get_clues.R` : Calcul des indices (0-3) à partir de la boucle.
+    * `is_solved.R` : Algorithme de vérification de la solution.
+* **`inst/shiny/`** : Code source de l'application interactive (`app.R`).
+* **`DESCRIPTION`** : Métadonnées du package, auteurs et dépendances (Shiny).
+* **`NAMESPACE`** : Déclaration des fonctions exportées.
+* **`slitherlinkR.Rproj`** : Fichier de configuration RStudio.
+* **`README.md`** : Présentation du projet et instructions.
 
 ---
 
-##  Structure du projet
 
-Le projet est organisé de la manière suivante :
-
-- `R/` : contient les fonctions du package  
-- `man/` : documentation des fonctions  
-- `inst/shiny/` : application Shiny  
-- `DESCRIPTION` : informations du package  
-- `NAMESPACE` : export des fonctions  
-- `README.md` : présentation du projet  
 ---
 
-##  Lancer le projet
 
-Pour exécuter le projet :
+##  Lancer l’application
 
-1. Ouvrir RStudio dans le dossier du projet
+Pour lancer le jeu Slitherlink, exécutez la commande suivante dans la console R :
 
-2. Charger le package :
-devtools::load_all()
-
-3. Lancer l’application Shiny :
+```r
 shiny::runApp("inst/shiny")
----
-
-##  Organisation Git
-
-- main → version stable
-- dev → développement
-
----
-
-##  Technologies utilisées
-
-- R
-- Shiny
-- ggplot2
-- Git / GitHub
-
----
-
-##  État du projet
-
-- logique principale du jeu : fonctionnelle
-- application Shiny : en cous de d'amélioration
-- interface utilisateur : en cours de développement
