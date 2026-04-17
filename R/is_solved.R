@@ -1,5 +1,7 @@
 #' Vérifier si la solution est correcte
 #'
+#' Cette fonction vérifie si la solution du Slitherlink est correcte.
+#'
 #' @param game objet slitherlink
 #' @return TRUE ou FALSE
 #' @export
