@@ -1,9 +1,21 @@
-#' Vérifier si la solution est correcte
+#' Vérifier la validité d'une solution Slitherlink
 #'
-#' Cette fonction vérifie si la solution du Slitherlink est correcte.
+#' Cette fonction vérifie si une solution respecte toutes les règles du jeu :
+#' \itemize{
+#'   \item respect des indices numériques
+#'   \item chaque sommet a degré 0 ou 2
+#'   \item existence d'une seule boucle fermée
+#' }
 #'
-#' @param game objet slitherlink
-#' @return TRUE ou FALSE
+#' @param game liste de classe \code{slitherlink} contenant :
+#'   \itemize{
+#'     \item clues : matrice des indices
+#'     \item segments : liste (horiz, vert)
+#'     \item n : taille de la grille
+#'   }
+#'
+#' @return TRUE si la solution est correcte, FALSE sinon
+#'
 #' @export
 
 is_solved <- function(game) {
@@ -58,12 +70,13 @@ is_solved <- function(game) {
 
   # --- 5. Parcourir la boucle ---
   ci <- start_i; cj <- start_j
-  pi <- -1;      pj <- -1   # nœud précédent fictif (impossible dans la grille)
+  pi <- -1;      pj <- -1
   visited <- 1
 
   repeat {
     next_i <- NA; next_j <- NA
 
+    # exploration des 4 directions
     # droite
     if (cj <= n && horiz[ci, cj] == 1 && !(ci == pi && cj+1 == pj)) {
       next_i <- ci; next_j <- cj + 1
