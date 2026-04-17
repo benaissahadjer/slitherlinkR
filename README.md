@@ -1,7 +1,8 @@
 # slitherlinkR 
 
 ## Présentation du Projet
-**Projet de programmation R – Université de Montpellier** **Encadrant :** Jean-Michel Marin  
+**Projet de programmation R – Université de Montpellier** 
+**Encadrant :** Jean-Michel Marin  
 
 Ce projet consiste à développer un package R complet ainsi qu’une application Shiny interactive pour le jeu de logique **Slitherlink**.
 
@@ -17,7 +18,7 @@ Ce projet consiste à développer un package R complet ainsi qu’une applicatio
 L’objectif de ce projet était de :
 - Concevoir un **package R** structuré et documenté.
 - Implémenter la **logique algorithmique** du Slitherlink (génération de boucle aléatoire, calcul d'indices et vérification de validité).
-- Développer une **interface Shiny moderne**.
+- Développer une **interface Shiny**.
 - Proposer une expérience de jeu fluide avec différents niveaux de difficulté.
 
 ---
@@ -34,13 +35,13 @@ Le Slitherlink est un puzzle logique se jouant sur une grille de points. Le but 
 L’interface utilisateur est conçue pour être simple et réactive. Voici les étapes et outils disponibles pour le joueur :
 
 ###  Déroulement d'une partie
-1. **Choisir le niveau** : Sélectionnez la difficulté via le menu déroulant (Facile, Moyen, Difficile, Expert). Cela ajuste la taille de la grille et le nombre d'indices visibles.
+1. **Choisir le niveau** : Sélectionnez la difficulté via le menu déroulant (Facile, Moyen, Difficile, Expert). Cela ajuste la taille de la grille le nombre d'indices visibles et la forme de la boucle (simple vs complexe).
 2. **Lancer le jeu** : Cliquez sur le bouton **"Nouvelle partie"** pour générer une grille aléatoire.
 3. **Tracer la boucle** : Cliquez directement sur les segments entre les points pour les activer (noir) ou les désactiver.
 
 ###  Barre d'outils (Boutons)
 * **Nouvelle partie** : Génère un nouveau puzzle basé sur le niveau de difficulté choisi.
-* **Vérifier** : Analyse instantanément si votre tracé respecte les indices numériques et s'il forme une boucle unique et fermée.
+* **Vérifier** : Analyse instantanément si votre tracé respecte les indices numériques et s'il forme une boucle unique et fermée. Elle nous indique si la partie est gagnée.
 * **Effacer** : Réinitialise votre tracé actuel pour recommencer la grille de zéro.
 * **Solution** : Affiche la réponse correcte si vous êtes bloqué (tous les segments de la boucle apparaissent).
 

@@ -1,5 +1,7 @@
 #' Générer une grille de Slitherlink
 #'
+#' Cette fonction génère ou extrait les indices nécessaires au jeu Slitherlink.
+#'
 #' @param n taille de la grille
 #' @return matrice des indices
 #' @export

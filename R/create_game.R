@@ -1,5 +1,7 @@
 #' Créer une nouvelle partie de Slitherlink
 #'
+#' Cette fonction crée une grille vide de Slitherlink de taille n x n.
+#'
 #' @param n taille de la grille
 #' @return un objet de type slitherlink
 #' @export
