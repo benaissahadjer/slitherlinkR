@@ -46,6 +46,20 @@ L’interface utilisateur est conçue pour être simple et réactive. Voici les 
 * **Solution** : Affiche la réponse correcte si vous êtes bloqué (tous les segments de la boucle apparaissent).
 
 ---
+
+---
+
+## 🖼️ Aperçu du jeu
+
+Voici un aperçu de l'interface interactive de **slitherlinkR** en action :
+
+<p align="center">
+  <img src="man/figures/image.png" width="85%" alt="Capture d'écran de l'application">
+  <br>
+  <em>Interface de jeu générant une grille avec les outils de vérification.</em>
+</p>
+
+---
 ---
 
 ##  Structure du Projet
