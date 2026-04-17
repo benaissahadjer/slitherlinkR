@@ -7,10 +7,6 @@
 
 Ce projet consiste à développer un package R complet ainsi qu’une application Shiny interactive pour le jeu de logique **Slitherlink**.
 
-##  Accès en ligne
-
-https://hadjer.shinyapps.io/shiny/
-
 ---
 
 ##  Groupe 5
